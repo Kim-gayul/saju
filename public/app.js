@@ -11,6 +11,10 @@ let chatHistory = [];
 let chatBusy = false;
 const chatMessages = document.querySelector('#chat-messages');
 const chatInput = document.querySelector('#chat-input');
+const backToTop = document.querySelector('#back-to-top');
+
+window.addEventListener('scroll', () => { backToTop.hidden = window.scrollY < 300; }, { passive: true });
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 function showView(view) {
   for (const name of ['reading', 'daily', 'chat']) document.querySelector(`#${name}-view`).hidden = name !== view;
