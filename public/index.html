@@ -11,31 +11,60 @@
   <div class="shell">
     <header class="site-header">
       <a class="brand" href="/" aria-label="결 홈"><span class="brand-mark">結</span><span>결 <small>나의 사주 이야기</small></span></a>
-      <span class="header-note">나를 이해하는 고요한 시간</span>
+      <nav class="main-nav" aria-label="주 메뉴">
+        <button type="button" class="nav-button active" data-view="reading" aria-current="page">사주풀이</button>
+        <button type="button" class="nav-button" data-view="daily">오늘의 운세</button>
+        <button type="button" class="nav-button" data-view="chat">AI와 상담하기</button>
+      </nav>
     </header>
     <main>
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="dot"></span> 사주 × 인공지능</p>
-          <h1>타고난 기운을 읽고,<br><em>오늘의 나</em>를 발견하다.</h1>
-          <p class="hero-description">태어난 순간의 네 기둥을 살펴보고, 그 안에 담긴 이야기를 당신의 언어로 풀어드립니다.</p>
-          <div class="hero-line"><span>01</span> 정보를 입력하세요 <i></i><span>02</span> 나만의 풀이를 만나세요</div>
-        </div>
-        <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="sun"></div><div class="art-symbol">結</div><span class="art-label art-label-top">天 · 하늘</span><span class="art-label art-label-bottom">地 · 땅</span></div>
+      <div id="reading-view" class="view">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="dot"></span> 사주 × 인공지능</p>
+            <h1>타고난 기운을 읽고,<br><em>오늘의 나</em>를 발견하다.</h1>
+            <p class="hero-description">태어난 순간의 네 기둥을 살펴보고, 그 안에 담긴 이야기를 당신의 언어로 풀어드립니다.</p>
+            <div class="hero-line"><span>01</span> 정보를 입력하세요 <i></i><span>02</span> 나만의 풀이를 만나세요</div>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="sun"></div><div class="art-symbol">結</div><span class="art-label art-label-top">天 · 하늘</span><span class="art-label art-label-bottom">地 · 땅</span></div>
+        </section>
+        <section class="workspace" id="start">
+          <div class="section-heading"><div><span class="section-kicker">YOUR STORY BEGINS HERE</span><h2>태어난 순간을 알려주세요</h2><p>입력한 정보는 풀이 생성에만 사용되며 이 앱에 저장되지 않습니다.</p></div><span class="step-chip">STEP 01 / 02</span></div>
+          <div class="form-card">
+            <form id="saju-form">
+              <div class="field-row"><label class="field"><span>이름 <small>선택</small></span><input name="name" type="text" maxlength="30" placeholder="어떻게 불러드릴까요?"></label><div class="field"><span>달력 종류</span><div class="segmented" role="group" aria-label="달력 종류"><label><input type="radio" name="calendar" value="solar" checked><span>양력</span></label><label><input type="radio" name="calendar" value="lunar"><span>음력</span></label></div></div></div>
+              <div class="field-row"><label class="field"><span>생년월일</span><input name="date" type="date" min="1900-01-01" max="2100-12-31" required></label><label class="field"><span>태어난 시간 <small>모르면 비워두세요</small></span><input name="time" type="time"></label></div>
+              <label class="check-row" id="leap-row" hidden><input name="leapMonth" type="checkbox"><span>음력 윤달에 태어났어요</span></label>
+              <div class="form-footer"><p><span class="info-icon">i</span> 출생 시간 미입력 시 시주를 제외한 세 기둥으로 풀이합니다.</p><button class="primary-button" id="submit-button" type="submit">나의 사주 보기 <span>↗</span></button></div>
+            </form>
+          </div>
+          <p class="error" id="error" role="alert" hidden></p>
+        </section>
+        <section class="results" id="results" hidden aria-live="polite">
+          <div class="section-heading"><div><span class="section-kicker">YOUR FOUR PILLARS</span><h2>나의 사주 원국</h2><p id="result-date"></p></div><span class="step-chip">STEP 02 / 02</span></div>
+          <div class="pillar-grid" id="pillars"></div>
+          <div class="reading-layout"><div class="energy-card"><span class="section-kicker">FIVE ELEMENTS</span><h3>오행의 균형</h3><div id="elements"></div><p>천간과 지지의 표면 오행을 센 값입니다. 지장간은 포함하지 않습니다.</p></div><article class="reading-card"><span class="section-kicker">A LETTER FOR YOU</span><h3>당신을 위한 해석</h3><div id="reading"></div></article></div>
+          <div class="continue-card"><div><span class="section-kicker">CONTINUE THE CONVERSATION</span><h3>AI 역술가와 대화를 이어 가시겠습니까?</h3><p>방금 살펴본 사주 원국을 바탕으로 궁금한 점을 편하게 물어보세요.</p></div><button class="primary-button" id="continue-chat" type="button">상담 시작하기 <span>↗</span></button></div>
+          <p class="disclaimer">사주 해석은 전통 문화에 기반한 참고용 콘텐츠입니다. 삶의 중요한 결정은 충분한 정보와 전문가의 조언을 함께 고려해 주세요.</p>
+        </section>
+      </div>
+      <section id="daily-view" class="view feature-view" hidden>
+        <div class="feature-heading"><span class="section-kicker">TODAY'S FLOW</span><h1>오늘의 기운을<br><em>차분히 살펴보세요.</em></h1><p>한국 시간 기준 오늘의 일진과 나의 원국을 함께 읽습니다.</p></div>
+        <div class="feature-card" id="daily-empty"><h2>나의 사주를 먼저 알려주세요</h2><p>사주풀이에서 생년월일을 입력하면 오늘의 운세를 더 깊이 살펴볼 수 있습니다.</p><button class="primary-button go-reading" type="button">사주풀이로 이동 <span>↗</span></button></div>
+        <div class="daily-card" id="daily-ready" hidden><div><span class="section-kicker">PERSONAL DAILY READING</span><h3>나를 위한 오늘의 운세</h3><p id="daily-profile"></p></div><button class="primary-button" id="daily-button" type="button">오늘의 운세 보기 <span>↗</span></button></div>
+        <div class="daily-result reading-card" id="daily-result" hidden><div class="daily-result-heading"><div><span class="section-kicker">A NOTE FOR TODAY</span><h3 id="daily-title">오늘의 기운</h3></div><span class="daily-pillar" id="daily-pillar"></span></div><div id="daily-reading"></div></div>
+        <p class="disclaimer">운세는 전통 문화에 기반한 참고용 콘텐츠입니다.</p>
       </section>
-      <section class="workspace" id="start">
-        <div class="section-heading"><div><span class="section-kicker">YOUR STORY BEGINS HERE</span><h2>태어난 순간을 알려주세요</h2><p>입력한 정보는 풀이 생성에만 사용되며 이 앱에 저장되지 않습니다.</p></div><span class="step-chip">STEP 01 / 02</span></div>
-        <div class="form-card">
-          <form id="saju-form">
-            <div class="field-row"><label class="field"><span>이름 <small>선택</small></span><input name="name" type="text" maxlength="30" placeholder="어떻게 불러드릴까요?"></label><div class="field"><span>달력 종류</span><div class="segmented" role="group" aria-label="달력 종류"><label><input type="radio" name="calendar" value="solar" checked><span>양력</span></label><label><input type="radio" name="calendar" value="lunar"><span>음력</span></label></div></div></div>
-            <div class="field-row"><label class="field"><span>생년월일</span><input name="date" type="date" min="1900-01-01" max="2100-12-31" required></label><label class="field"><span>태어난 시간 <small>모르면 비워두세요</small></span><input name="time" type="time"></label></div>
-            <label class="check-row" id="leap-row" hidden><input name="leapMonth" type="checkbox"><span>음력 윤달에 태어났어요</span></label>
-            <div class="form-footer"><p><span class="info-icon">i</span> 출생 시간 미입력 시 시주를 제외한 세 기둥으로 풀이합니다.</p><button class="primary-button" id="submit-button" type="submit">나의 사주 보기 <span>↗</span></button></div>
-          </form>
+      <section id="chat-view" class="view feature-view" hidden>
+        <div class="feature-heading"><span class="section-kicker">TALK WITH YOUR GUIDE</span><h1>궁금한 마음을<br><em>대화로 풀어보세요.</em></h1><p>사주에 담긴 상징을 바탕으로 AI 역술가와 이야기를 나눕니다.</p></div>
+        <div class="chat-shell">
+          <div class="chat-top"><div class="chat-avatar">結</div><div><strong>결 상담가</strong><span id="chat-profile">일반 상담 · 원국을 입력하면 맞춤 상담이 가능합니다</span></div><span class="chat-online">상담 중</span></div>
+          <div class="chat-messages" id="chat-messages" role="log" aria-live="polite"></div>
+          <div class="chat-suggestions" id="chat-suggestions"><button type="button" data-prompt="제 사주에서 가장 눈에 띄는 기운은 무엇인가요?">눈에 띄는 기운</button><button type="button" data-prompt="요즘 일과 진로에 대해 어떤 관점으로 보면 좋을까요?">일과 진로</button><button type="button" data-prompt="관계에서 제가 살펴보면 좋은 점이 있을까요?">관계 이야기</button></div>
+          <form id="chat-form" class="chat-form"><label class="sr-only" for="chat-input">상담 메시지</label><textarea id="chat-input" rows="2" maxlength="1000" placeholder="궁금한 이야기를 적어주세요..."></textarea><button type="submit" id="chat-send">보내기 ↗</button></form>
+          <p class="chat-note">AI 상담은 전통 문화에 기반한 참고용입니다. 대화는 이 페이지를 닫으면 사라집니다.</p>
         </div>
-        <p class="error" id="error" role="alert" hidden></p>
       </section>
-      <section class="results" id="results" hidden aria-live="polite"><div class="section-heading"><div><span class="section-kicker">YOUR FOUR PILLARS</span><h2>나의 사주 원국</h2><p id="result-date"></p></div><span class="step-chip">STEP 02 / 02</span></div><div class="pillar-grid" id="pillars"></div><div class="reading-layout"><div class="energy-card"><span class="section-kicker">FIVE ELEMENTS</span><h3>오행의 균형</h3><div id="elements"></div><p>천간과 지지의 표면 오행을 센 값입니다. 지장간은 포함하지 않습니다.</p></div><article class="reading-card"><span class="section-kicker">A LETTER FOR YOU</span><h3>당신을 위한 해석</h3><div id="reading"></div></article></div><p class="disclaimer">사주 해석은 전통 문화에 기반한 참고용 콘텐츠입니다. 삶의 중요한 결정은 충분한 정보와 전문가의 조언을 함께 고려해 주세요.</p></section>
     </main>
     <footer><span>結 · 나의 사주 이야기</span><span>천천히, 나를 알아가는 시간</span></footer>
   </div>
